@@ -1,0 +1,88 @@
+---
+
+# Install ProxySQL and Python packages
+#
+#
+#
+
+- name: Ensure ca-certificates package is present
+  become: true
+  apt:
+    name: ca-certificates
+    update_cache: yes
+    cache_valid_time: 3600
+    state: present
+  when: install_proxysql_packages|bool and ansible_os_family == 'Debian'
+  tags:
+    - proxysql-install
+    - proxysql-install-ca-certs
+
+- name: Install MySQL repository packages from Percona web
+  become: true
+  apt:
+    deb: "{{ proxysql_package.url }}/{{ proxysql_package.name }}"
+    update_cache: true
+    allow_unauthenticated: true
+    install_recommends: true
+  when: install_proxysql_packages|bool and ansible_os_family == 'Debian'
+  tags:
+    - proxysql-install
+    - proxysql-install-pkg
+
+- name: Update apt packages for Debian family
+  become: true
+  apt:
+    force_apt_get: true
+    update_cache: true
+  when: os_package_update|bool and ansible_os_family == 'Debian'
+  tags:
+    - proxysql-install
+    - proxysql-install-update
+
+- name: Upgrade apt packages for Debian family
+  become: true
+  apt:
+    force_apt_get: true
+    upgrade: true
+  when: os_package_upgrade|bool and ansible_os_family == 'Debian'
+  tags:
+    - proxysql-install
+    - proxysql-install-upgrade
+
+- name: Install ProxySQL packages
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  when: install_proxysql_packages|bool
+  with_items: "{{ proxysql_packages }}"
+  tags:
+    - proxysql-install
+    - proxysql-install-packages
+
+- name: Install Python packages
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  when: install_python_mysql_connector|bool
+  with_items: "{{ python_packages }}"
+  tags:
+    - proxysql-install
+    - proxysql-python-packages
+
+- name: Install Python pip modules
+  become: true
+  pip:
+    name: "{{ pip_packages }}"
+    state: present
+  when: install_pip_packages|bool
+  tags:
+    - proxysql-install
+    - proxysql-python-pip-packages
+
+- name: Reread ansible_lsb facts
+  become: true
+  setup: filter=ansible_lsb*
+  tags:
+    - proxysql-install

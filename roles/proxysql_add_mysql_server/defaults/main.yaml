@@ -1,0 +1,12 @@
+---
+
+proxysql_create_server: true
+proxysql_admin_host: "0.0.0.0"
+proxysql_admin_port: 6032
+proxysql_admin_user: "admin"
+proxysql_admin_password: "admin"
+proxysql_create_servers:
+  - {mysql_hostname: "mysql-staging-60", server_weight: 10, server_status: "ONLINE", server_hostgroup_id: 0, mysql_ip_address: "10.47.183.243", max_rep_lag: 10}
+  - {mysql_hostname: "mysql-2", server_weight: 100, server_status: "ONLINE", server_hostgroup_id: 2, mysql_ip_address: "10.0.0.2", max_rep_lag: 100 }
+  - {mysql_hostname: "mysql-3", server_weight: 200, server_status: "ONLINE", server_hostgroup_id: 2, mysql_ip_address: "10.0.0.3", max_rep_lag: 100 }
+  - {mysql_hostname: "mysql-reporting", server_weight: 10, server_status: "OFFLINE_SOFT", server_hostgroup_id: 3, mysql_ip_address: "10.0.0.4", max_rep_lag: 10000}

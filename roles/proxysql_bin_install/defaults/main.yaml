@@ -1,0 +1,18 @@
+---
+
+os_package_update: true
+os_package_upgrade: true
+install_proxysql_packages: true
+install_python_mysql_connector: true
+install_pip_packages: true
+proxysql_package: {  url: "https://repo.percona.com/apt", name: "percona-release_latest.{{ ansible_distribution_release }}_all.deb"  }
+
+proxysql_packages:
+  - "proxysql2"
+
+python_packages:
+  - python-pip
+  - python-pymysql
+
+pip_packages:
+  - mysql-connector

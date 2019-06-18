@@ -1,0 +1,20 @@
+---
+
+- name: Create ProxySQL user for MySQL
+  proxysql_mysql_users:
+          login_host: "{{ proxysql_admin_host }}"
+          login_port: "{{ proxysql_admin_port }}"
+          login_user: "{{ proxysql_admin_user }}"
+          login_password: "{{ proxysql_admin_password }}"
+          username: "{{ item.mysql_username }}"
+          password: "{{ item.mysql_password }}"
+          default_hostgroup: "{{ item.mysql_user_default_hostgroup }}"
+          active: "{{ mysql_user_active }}"
+          state: present
+          load_to_runtime: True
+          save_to_disk: True
+  when: proxysql_create_user|bool
+  with_items:
+    - "{{ proxysql_create_users }}"
+  tags: 
+    - proxysql-create-users

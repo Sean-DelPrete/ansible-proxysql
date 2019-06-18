@@ -1,0 +1,92 @@
+---
+
+# Setup MySQL specific Kernel tuning
+#
+
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+  tags:
+    - os-kernel-tuning
+
+- name: Kernel tunables for MySQL
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    reload: true
+    ignoreerrors: true
+  become: true
+  when: enable_kernel_tuning and ansible_memtotal_mb > 2048
+  with_items:
+    - "{{os_sysctl}}"
+  tags:
+    - os-kernel-tuning
+    - sysctl
+
+- name: MySQL hugepages
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    reload: true
+    ignoreerrors: true
+  become: true
+  when: enable_hugepages_tuning and ansible_memtotal_mb > 2048
+  with_items: "{{os_hugepages}}"
+  tags:
+    - os-kernel-tuning
+    - sysctl
+    - hugepages
+
+- name: Disable Transparent Hugepages (runtime)
+  shell: if test -f {{ item.path }}; then {{ item.disable }} {{ item.path }}; fi;
+  become: true
+  with_items:
+      - "{{ transparent_hugepage_disable }}"
+  changed_when: false
+  tags:
+    - os-kernel-tuning
+    - huge-pages
+
+- name: Disable Transparent Hugepages (permanently)
+  lineinfile:
+    dest: "{{ item.rclocal }}"
+    line: "{{ item.disable }} {{ item.path }}"
+    insertbefore: '^exit 0'
+    state: present
+  become: true
+  with_items:
+      - "{{ transparent_hugepage_disable }}"
+  tags:
+    - os-kernel-tuning
+    - huge-pages
+
+- name: Include set host facts role
+  include_role:
+    name: "{{ role_path }}/../proxysql_set_host_facts"
+  when: enable_io_scheduler_tuning|bool
+
+- name: Tune IO Scheduler to NOOP
+  lineinfile:
+    dest: "{{ tune_io_scheduler.rclocal }}"
+    line: "{{ tune_io_scheduler.name }} {{ tune_io_scheduler.path1 }}/{{ item }}/{{ tune_io_scheduler.path2 }}"
+    insertbefore: '^exit 0'
+    state: present
+  become: true
+  with_items:
+      - "{{ block_devices }}"
+  when: enable_io_scheduler_tuning and block_devices
+  tags:
+    - os-kernel-tuning
+    - io-scheduler-tuning
+
+- name: Fix permissions on rc.local
+  file:
+    path: "{{ item.rclocal }}"
+    mode: 755
+  become: true
+  with_items:
+      - "{{ transparent_hugepage_disable }}"
+  tags:
+    - os-kernel-tuning
+    - huge-pages

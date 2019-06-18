@@ -1,0 +1,39 @@
+---
+
+# Add a lines to ProxySQL users .bash_profile
+#
+#
+
+- name: Check ProxySQL user's bash profile
+  become: true
+  become_user: "{{ proxysql_system_user }}"
+  stat:
+    path: "{{ user_profile }}"
+  register: bash_profile_check
+  tags:
+    - proxysql-user-profile
+    - bash_profile
+
+- name: Create ProxySQL user's bash profile
+  become: true
+  become_user: "{{ proxysql_system_user }}"
+  file:
+    path: "{{ user_profile }}"
+    state: touch
+  when: not bash_profile_check.stat.exists
+  tags:
+    - proxysql-user-profile
+    - bash_profile
+
+- name: Set environment in ProxySQL user's bash profile
+  become: true
+  become_user: "{{ proxysql_system_user }}"
+  lineinfile:
+    dest: "{{ user_profile }}"
+    line: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ bash_profile_addline }}"
+  tags:
+    - proxysql-user-profile
+    - bash_profile

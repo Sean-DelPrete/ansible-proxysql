@@ -1,0 +1,26 @@
+---
+
+
+ - name: ProxySQL node setup 
+   hosts: proxysql
+   tasks:
+    - include_role:
+        name: ../roles/proxysql_os_common
+    - include_role:
+        name: ../roles/proxysql_os_user
+   - include_role: 
+       name: ../roles/proxysql_add_bash_profile 
+    - include_role: 
+        name: ../roles/proxysql_bin_install
+     - include_role:
+         name: ../roles/proxysql_service_stop
+     - include_role:
+         name: ../roles/proxysql_os_kernel_tuning
+     - include_role:
+         name: ../roles/proxysql_config_setup
+     - include_role:
+         name: ../roles/proxysql_service_start
+     - include_role:
+         name: ../roles/proxysql_add_mysql_user
+     - include_role:
+         name: ../roles/proxysql_add_mysql_server

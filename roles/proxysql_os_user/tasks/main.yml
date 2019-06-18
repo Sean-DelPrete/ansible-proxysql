@@ -1,0 +1,37 @@
+---
+
+- name: Adding groups
+  become: true
+  group:
+    name: "{{item.group}}"
+    gid: "{{item.gid}}"
+    state: present
+  with_items: "{{add_groups}}"
+  tags:
+    - users
+
+- name: Adding users
+  become: true
+  user:
+    name: "{{item.username}}"
+    comment: "{{item.comment}}"
+    uid: "{{item.uid}}"
+    group: "{{item.primgroup}}"
+    shell: "{{item.shell}}"
+    home: "{{item.home}}"
+    state: present
+  with_items: "{{add_users}}"
+  tags:
+    - users
+
+- name: Add user to sudoers
+  become: true
+  template:
+    src: sudoers.j2
+    dest: /etc/sudoers.d/{{item.username}}
+    owner: root
+    mode: 0600
+  with_items: "{{add_users}}"
+  when: configure_user_sudo|bool
+  tags:
+    - users

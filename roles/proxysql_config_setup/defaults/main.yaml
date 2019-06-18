@@ -1,0 +1,29 @@
+---
+
+mysql_server_version: "5.6"
+proxysql_base_data_dir: "/proxysql-data"
+proxysql_admin_port: 6032
+proxysql_max-connections: 1000
+proxysql_system_user: "root"
+proxysql_system_group: "proxysql"
+proxysql_system_database_name: "proxysql"
+service_name: "proxysql"
+enable_proxysql_conf: true
+proxysql_bin_dir: "/usr/sbin"
+proxysql_conf_dir: "/etc"
+proxysql_conf_file: "proxysql.cnf"
+proxysql_conf_template: "proxysql.cnf.j2"
+mysql_route_port: 3306
+monitor_username: "monitor"
+monitor_password: "monitor"
+root_mysql_username: "root"
+root_mysql_password: "testing24"
+
+proxysql_admin_user: "admin"
+proxysql_admin_pass: "admin"
+# MySQL VM tuning parameters
+#
+enable_hugepages_tuning: true
+
+proxysql_sql_mode: ""
+

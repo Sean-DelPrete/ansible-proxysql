@@ -1,0 +1,39 @@
+---
+
+os_sysctl:
+  - {name: kernel.shmall, value: 4294967296}
+  - {name: kernel.shmmax, value: 68719476736}
+  - {name: kernel.shmmni, value: 4096}
+  - {name: kernel.sem, value: "250 32000 100 256"}
+  - {name: fs.file-max, value: 6815744}
+  - {name: fs.aio-max-nr, value: 3145728}
+  - {name: net.ipv4.ip_local_port_range, value: "9000 65500"}
+  - {name: net.core.rmem_default, value: 262144}
+  - {name: net.core.rmem_max, value: 4194304}
+  - {name: net.core.wmem_default, value: 262144}
+  - {name: net.core.wmem_max, value: 1048576}
+  - {name: kernel.panic_on_oops, value: 1}
+  - {name: kernel.sysrq, value: 1}
+  - {name: vm.swappiness, value: 0}
+  - {name: vm.min_free_kbytes, value: 524288}
+
+transparent_hugepage_disable:
+           - {disable: "echo never >", path: /sys/kernel/mm/transparent_hugepage/enabled, rclocal: /etc/rc.d/rc.local}
+           - {disable: "echo never >", path: /sys/kernel/mm/transparent_hugepage/defrag, rclocal: /etc/rc.d/rc.local}
+
+enable_io_schedler: false
+
+tune_io_scheduler:
+        - {name: "echo noop >", rclocal: /etc/rc.d/rc.local, path1: "/sys/block", path2: "queue/scheduler"}
+
+configure_hugepages: true
+configure_hugepages_by: percentage          # percentage/memory
+percent_hugepages: 50                       # Percentage (0-100) of total RAM to dedicate to hugepages, Configures vm.nr_hugepages
+size_in_gb_hugepages: 1                     # The amount of RAM in GB to dedicate to hugepages
+nr_hugepages_percent: "{{ ((((percent_hugepages/100) * ansible_memtotal_mb)/2)+2)|round|int }}"
+nr_hugepages_memory: "{{ (((size_in_gb_hugepages*1024)/2)+2)|round|int }}"
+nr_hugepages: "{% if configure_hugepages %}{% if configure_hugepages_by|lower == 'percentage'%}{{ nr_hugepages_percent }}{%elif configure_hugepages_by|lower == 'memory' %}{{ nr_hugepages_memory }}{% endif %}{% else %}0{% endif %}"
+
+
+os_hugepages:
+  - {name: vm.nr_hugepages, value: "{{ nr_hugepages }}"}

@@ -1,0 +1,17 @@
+---
+
+# Setup Host facts to reuse these facts later
+#
+
+- name: Initialize fact
+  set_fact:
+    block_devices: []
+    file_systems: []
+
+- name: Set facts for devices
+  set_fact:
+    block_devices: "{{ block_devices + [ item.key ] }}"
+  with_dict: " {{ ansible_facts.devices }}"
+  loop_control:
+    label: "{{ item.key }}"
+  when: item.value["model"] == 'PersistentDisk' and not item.value["partitions"]

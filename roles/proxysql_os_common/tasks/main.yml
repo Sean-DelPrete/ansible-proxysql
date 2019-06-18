@@ -1,0 +1,84 @@
+---
+
+# Install common tools and packages
+#
+#
+#
+
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+  tags:
+    - common
+    - common-os-packages
+
+- name: Update apt packages for Debian family
+  become: true
+  apt:
+    force_apt_get: true
+    update_cache: true
+    cache_valid_time: 86400 #One day
+  when: os_package_update|bool and ansible_os_family == 'Debian'
+
+- name: Upgrade apt packages for Debian family
+  become: true
+  apt:
+    force_apt_get: true
+    upgrade: true
+  when: os_package_upgrade|bool and ansible_os_family == 'Debian'
+
+- name: Install common packages
+  become: true
+  package:
+    name: "{{ common_packages }}"
+    state: present
+  tags:
+    - common
+    - common-os-packages
+
+- name: Reread ansible_lsb facts
+  setup: filter=ansible_lsb*
+  become: true
+  tags:
+    - common
+    - commonpackages
+
+- name: set timezone
+  timezone:
+    name: "{{ time_zone }}"
+  become: true
+  when: set_time_zone|bool
+  tags:
+    - common
+    - ntp_timezone
+
+- name: Start and enable NTP
+  service:
+    name: "{{ ntp_daemon }}"
+    state: started
+    enabled: true
+  become: true
+  when: configure_ntp|bool
+  tags:
+    - common
+    - ntp_timezone
+
+- name: Generate ntp.conf file
+  template:
+    src: ntp.conf.j2
+    dest: /etc/ntp.conf
+  notify: restart ntp
+  become: true
+  when: ntp_manage_config|bool and ansible_os_family == 'Debian'
+  tags:
+    - common
+    - ntp_timezone
+
+- name: Add motd
+  template:
+    src: motd-penguin-google-cloud.j2
+    dest: /etc/motd
+  become: true
+  when: configure_motd|bool
+  tags:
+    - common
+    - motd

@@ -1,0 +1,13 @@
+---
+
+- name: Create Proxysql Server config
+  become: true
+  template:
+    src: "{{ proxysql_conf_template }}"
+    dest: "{{ proxysql_conf_dir }}/{{ proxysql_conf_file }}"
+    owner: "{{ proxysql_system_user }}"
+    group: "{{ proxysql_system_group }}"
+  when: enable_proxysql_conf|bool
+  tags:
+    - proxyql-config-setup
+    - proxyql-config-setup-proxysql-conf

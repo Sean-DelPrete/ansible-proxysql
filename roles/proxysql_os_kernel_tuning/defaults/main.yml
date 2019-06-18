@@ -1,0 +1,7 @@
+---
+
+enable_kernel_tuning: true
+enable_io_scheduler_tuning: true
+enable_hugepages_tuning: false
+block_devices: "sda"
+percent_hugepages: 80

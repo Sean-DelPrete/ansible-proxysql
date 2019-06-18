@@ -1,0 +1,12 @@
+---
+
+add_bash_profile: true
+
+proxysql_system_user: proxysql
+proxysql_system_group: proxysql
+
+user_profile: "~/.bash_profile"
+
+bash_profile_addline:
+ - "# Modifying .bash_profile for user mysql in his home directory"
+ - "PATH=/usr/sbin:$PATH"

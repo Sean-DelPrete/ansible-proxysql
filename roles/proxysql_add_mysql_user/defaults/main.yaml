@@ -1,0 +1,11 @@
+---
+
+proxysql_create_user: true
+proxysql_admin_host: "0.0.0.0"
+proxysql_admin_port: 6032
+proxysql_admin_user: "admin"
+proxysql_admin_password: "admin"
+mysql_user_active: True
+proxysql_create_users:
+  - {mysql_username: "sean", mysql_password: "Virtue84!", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "ranga", mysql_password: "funtimes", mysql_user_default_hostgroup: 2}

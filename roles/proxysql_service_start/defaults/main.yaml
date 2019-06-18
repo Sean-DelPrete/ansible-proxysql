@@ -1,0 +1,6 @@
+---
+
+enable_proxysql_service: true 
+start_proxysql_service: true
+service_name: proxysql
+service_state: started

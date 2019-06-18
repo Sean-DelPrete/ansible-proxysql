@@ -1,0 +1,45 @@
+---
+
+ntp_daemon: ntp
+
+common_packages:
+  - tzdata
+  - ntp
+  - vim
+  - iputils-ping
+  - netcat
+  - lsb-core
+  - wget
+  - apt-utils
+  - apt-file
+  - apt-show-versions
+  - screen
+  - curl
+  - facter
+  - module-init-tools
+  - ethtool
+  - bc
+  - dnsutils
+  - make
+  - sysstat
+  - unzip
+  - zip
+  - openssh-client
+  - collectl
+  - rlwrap
+  - expect
+  - git
+  - lvm2
+  - gzip
+  - xfsprogs
+  - python-pip
+  - autofs
+  - parted
+  - mlocate
+  - ksh
+  - procps
+  - psmisc
+  - fish
+  - python-openssl
+  - tree
+    #  - btrfs-progs # commented for Ubuntu 16.04 Xenial. Only available in 18.04

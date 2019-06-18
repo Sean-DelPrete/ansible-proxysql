@@ -1,0 +1,19 @@
+---
+
+- name: Create ProxySQL Server routing rules
+  proxysql_backend_servers:
+          login_host: "{{ proxysql_admin_host }}"
+          login_port: "{{ proxysql_admin_port }}"
+          login_user: "{{ proxysql_admin_user }}"
+          login_password: "{{ proxysql_admin_password }}"
+          hostname: "{{ mysql_ip_address }}"
+          comment: "{{ mysql_hostname }}"
+          hostgroupd_id: "{{ hostgroup_id }}"
+          state: absent
+          load_to_runtime: True
+          save_to_disk: True
+  when: proxysql_remove_server
+  with_itmes: 
+    - "{{ proxysql_remove_severs }}" 
+  tags: 
+    - proxysql-remove-servers

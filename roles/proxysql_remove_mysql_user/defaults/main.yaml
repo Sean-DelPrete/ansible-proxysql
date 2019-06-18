@@ -1,0 +1,11 @@
+---
+
+proxysql_remove_user: true
+proxysql_admin_host: "0.0.0.0"
+proxysql_admin_port: 6032
+proxysql_admin_user: "admin"
+proxysql_admin_password: "admin"
+mysql_user_default_hostgorp: 1
+proxysql_remove_users:
+  - {mysql_username: "sean"}
+  - {mysql_username: "ranga", mysql_user_default_hostrgroup: 2}

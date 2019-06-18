@@ -1,0 +1,21 @@
+---
+
+configure_motd: true
+configure_ntp: true
+set_time_zone: true
+ntp_manage_config: true
+ntp_enabled: true
+os_package_update: true
+os_package_upgrade: true
+install_os_packages: true
+mysql_port: 3306
+
+time_zone: "America/Los_Angeles"
+ntp_driftfile: "/var/lib/ntp/ntp.drift"
+
+ntp_servers:
+  - "metadata.google.internal iburst"
+
+ntp_restrict:
+  - "127.0.0.1"
+  - "::1"

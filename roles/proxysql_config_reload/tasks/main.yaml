@@ -1,0 +1,27 @@
+---
+
+- name: Load Proxysql Variables from config
+  proxysql_manage_config: 
+    login_user: "{{ proxysql_admin_user }}"
+    login_password: "{{ proxysql_admin_password }}"
+    action: "LOAD"
+    config_settings: "MYSQL VARIABLES"
+    direction: "FROM"
+    config_layer: "CONFIG"
+  when: reload_proxysql_conf|bool
+  tags:
+    - proxyql-config-load
+
+- name: Save Proxysql Variables to Disk
+  proxysql_manage_config:
+    login_user: "{{ proxysql_admin_user }}"
+    login_password: "{{ proxysql_admin_password }}"
+    action: "SAVE"
+    config_settings: "MYSQL VARIABLES"
+    direction: "TO"
+    config_layer: "DISK"
+  when: reload_proxysql_conf|bool
+  notify:
+    - Restart Proxysql
+  tags:
+    - proxyql-config-reload

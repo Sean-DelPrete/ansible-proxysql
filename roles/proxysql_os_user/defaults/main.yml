@@ -1,0 +1,12 @@
+---
+
+configure_user_sudo: true
+
+proxysql_system_user: proxysql
+proxysql_system_group: proxysql
+
+add_groups:
+  - {group: "{{ proxysql_system_group }}", gid: 60000}
+
+add_users:
+  - {username: "{{ proxysql_system_user }}", uid: 60000, primgroup: "{{ proxysql_system_group }}", comment: "ProxySQL Service Account", shell: "/bin/bash", home: "/home/proxysql"}

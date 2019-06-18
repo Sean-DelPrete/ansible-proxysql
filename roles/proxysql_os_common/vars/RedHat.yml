@@ -1,0 +1,52 @@
+---
+
+ntp_daemon: ntpd
+
+common_packages:
+  - redhat-lsb-core
+  - tzdata
+  - gzip
+  - wget
+  - yum-utils
+  - ntp
+  - screen
+  - curl
+  - facter
+  - procps
+  - module-init-tools
+  - ethtool
+  - bc
+  - nc
+  - bind-utils
+  - nfs-utils
+  - make
+  - sysstat
+  - unzip
+  - zip
+  - openssh-clients
+  - compat-libcap1
+  - collectl
+  - rlwrap
+  - ntp
+  - expect
+  - git
+  - lvm2
+  - xfsprogs
+  - btrfs-progs
+  - python-devel
+  - python-pip
+  - libselinux-python
+  - autofs
+  - parted
+  - mlocate
+  - ntp
+  - ksh
+  - mksh
+  - lvm2
+  - xfsprogs
+  - btrfs-progs
+  - procps
+  - psmisc
+  - fish
+  - python-pyOpenSSL
+  - tree

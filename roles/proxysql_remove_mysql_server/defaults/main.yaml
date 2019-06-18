@@ -1,0 +1,12 @@
+---
+
+proxysql_remove_server: true
+proxysql_admin_host: "0.0.0.0"
+proxysql_admin_port: 6032
+proxysql_admin_user: "admin"
+proxysql_admin_password: "admin"
+proxysql_remove_servers:
+  - {mysql_hostname: "mysql-1", hostgroup_id: 1, mysql_ip_address:"10.0.0.1"}
+  - {mysql_hostname: "mysql-2", hostgroup_id: 2, mysql_ip_address:"10.0.0.2"}
+  - {mysql_hostname: "mysql-3", hostgroup_id: 2, mysql_ip_address:"10.0.0.3"}
+  - {mysql_hostname: "mysql-reporting", hostgroup_id: 3, mysql_ip_address:"10.0.0.4"}

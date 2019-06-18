@@ -1,0 +1,6 @@
+---
+
+service_name: "proxysql"
+reload_proxysql_conf: true
+proxysql_admin_user: "admin"
+proxysql_admin_password: "admin"

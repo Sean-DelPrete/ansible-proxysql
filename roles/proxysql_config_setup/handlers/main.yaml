@@ -1,0 +1,7 @@
+---
+
+- name: Restart Proxysql
+  become: true
+  service:
+    name: "{{ service_name }}"
+    state: "restarted"

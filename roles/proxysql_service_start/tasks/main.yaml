@@ -1,0 +1,14 @@
+---
+
+- name: ProxySQL Service "{{ service_state }}"
+  become: true
+  systemd:
+    name: "{{ service_name }}"
+    state: "{{ service_state }}"
+    enabled: true
+    daemon_reload: true
+  when: enable_proxysql_service|bool and start_proxysql_service|bool
+  tags:
+    - proxysql-service-enable
+    - proxysql-service-start
+    - proxysql-service
