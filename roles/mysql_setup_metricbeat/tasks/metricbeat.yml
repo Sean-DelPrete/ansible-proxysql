@@ -1,0 +1,37 @@
+---
+  - name: Create metricbeat configuration file
+    template:
+      src: ../templates/metricbeat.yml.j2
+      dest: /etc/metricbeat/metricbeat.yml
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Create metricbeat configuration file
+    template:
+      src: ../templates/modules.d/system.yml
+      dest: /etc/metricbeat/modules.d/system.yml
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Create mysql configuration file
+    when: mysql_status.stat.exists
+    template:
+      src: ../templates/modules.d/mysql.yml
+      dest: /etc/metricbeat/modules.d/mysql.yml
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: restart beats
+    service: name=metricbeat state=restarted
+
+  - name: Enable the metricbeat systemd service
+    systemd:
+      name: metricbeat
+      enabled: yes
+      state: started
+      daemon_reload: yes
+
+

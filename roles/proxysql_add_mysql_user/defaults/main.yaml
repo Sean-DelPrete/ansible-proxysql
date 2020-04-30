@@ -8,4 +8,11 @@ proxysql_admin_password: "admin"
 mysql_user_active: True
 proxysql_create_users:
   - {mysql_username: "sean", mysql_password: "Virtue84!", mysql_user_default_hostgroup: 0}
-  - {mysql_username: "ranga", mysql_password: "funtimes", mysql_user_default_hostgroup: 2}
+  - {mysql_username: "ranga", mysql_password: "funtimes", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "rpotluri", mysql_password: "", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "kjamal",  mysql_password: "", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "sdelprete", mysql_password: "", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "mysql_admin",  mysql_password: "", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "dakishore",  mysql_password: "", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "dbadmin", mysql_password: "db@Dm1n", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "datadog", mysql_password: "DataD0gGCP!", mysql_user_default_hostgroup: 0}

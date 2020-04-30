@@ -4,3 +4,9 @@ service_name: "proxysql"
 reload_proxysql_conf: true
 proxysql_admin_user: "admin"
 proxysql_admin_password: "admin"
+proxysql_variable: "mysql-interfaces"
+proxysql_variable_value: "0.0.0.0:3306"
+proxy_save_to_disk: "yes"
+
+#proxysql_config_values:
+#  - {proxysql_variable: "mysql-interfaces", proxysql_variable_value: "0.0.0.0:3306", proxy_save_to_disk: "yes"}  

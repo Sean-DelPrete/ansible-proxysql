@@ -1,0 +1,12 @@
+---
+
+
+ - name: ProxySQL node setup
+   hosts: proxysql
+   vars:
+     proxysql_create_servers:
+       - {mysql_hostname: "vsguc1gpmyas-de", server_weight: 10, server_status: "ONLINE", server_hostgroup_id: 5, mysql_ip_address: "10.111.176.60", max_rep_lag: 100}
+       - {mysql_hostname: "vsguc1gpmyas-cd", server_weight: 100, server_status: "ONLINE", server_hostgroup_id: 6, mysql_ip_address: "10.111.176.59", max_rep_lag: 100}
+       - {mysql_hostname: "vsguc1gpmyas-4a", server_weight: 100, server_status: "ONLINE", server_hostgroup_id: 6, mysql_ip_address: "10.111.176.61", max_rep_lag: 100}
+
+

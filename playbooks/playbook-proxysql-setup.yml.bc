@@ -21,10 +21,6 @@
      - include_role:
          name: ../roles/proxysql_service_start
      - include_role:
-         name: ../roles/proxysql_config_reload
-     - include_role:
-         name: ../roles/proxysql_service_start
-     - include_role:
          name: ../roles/proxysql_add_mysql_user
      - include_role:
          name: ../roles/proxysql_add_mysql_server

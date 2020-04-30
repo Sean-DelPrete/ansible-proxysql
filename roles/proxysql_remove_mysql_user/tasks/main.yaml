@@ -2,12 +2,11 @@
 
 - name: Remove ProxySQL user for MySQL
   proxysql_mysql_users:
-          login_host: "{{ proxysql_login_host }}"
-          login_port: "{{ proxysql_login_port }}"
-          login_user: "{{ proxysql_login_user }}"
+          login_host: "{{ proxysql_admin_host }}"
+          login_port: "{{ proxysql_admin_port }}"
+          login_user: "{{ proxysql_admin_user }}"
           login_password: "{{ proxysql_admin_password }}"
-          username: "{{ mysql_username }}"
-          default_hostgroup: "{{ mysql_user_default_hostgroup }}"
+          username: "{{ item.mysql_username }}"
           state: absent
           load_to_runtime: True
           save_to_disk: True

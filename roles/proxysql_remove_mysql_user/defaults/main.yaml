@@ -5,7 +5,15 @@ proxysql_admin_host: "0.0.0.0"
 proxysql_admin_port: 6032
 proxysql_admin_user: "admin"
 proxysql_admin_password: "admin"
-mysql_user_default_hostgorp: 1
 proxysql_remove_users:
   - {mysql_username: "sean"}
-  - {mysql_username: "ranga", mysql_user_default_hostrgroup: 2}
+  - {mysql_username: "ranga"}
+  - {mysql_username: "mysql"}
+  - {mysql_username: "rpotluri"}
+  - {mysql_username: "kjamal"}
+  - {mysql_username: "sdelprete"}
+  - {mysql_username: "mysql_admin"}
+  - {mysql_username: "dakishore"}
+  - {mysql_username: "admin"}
+  - {mysql_username: "datadog"}
+  - {mysql_username: "dbadmin"}

@@ -1,0 +1,24 @@
+---
+
+
+ - name: ProxySQL node setup 
+   hosts: proxysql
+   vars:
+     proxysql_create_users:
+       - {mysql_username: "ascope", mysql_password: "*5C781E3BC3FCC1337D7DE746FC863EF371EAEC54", mysql_user_default_hostgroup: 0}
+       - {mysql_username: "billing", mysql_password: "maims-TVzin", mysql_user_default_hostgroup: 2}
+       - {mysql_username: "support", mysql_password: "d5uWpZYLYO6UEiPxcFh", mysql_user_default_hostgroup: 4}
+     proxysql_create_servers:
+       - {mysql_hostname: "vsguc1gpmyas-9c", server_weight: 10, server_status: "ONLINE", server_hostgroup_id: 0, mysql_ip_address: "10.111.176.19", max_rep_lag: 100}
+       - {mysql_hostname: "vsguc1gpmyas-38", server_weight: 100, server_status: "ONLINE", server_hostgroup_id: 1, mysql_ip_address: "10.111.176.24", max_rep_lag: 100}
+       - {mysql_hostname: "vsguc1gpmyas-3b", server_weight: 100, server_status: "ONLINE", server_hostgroup_id: 1, mysql_ip_address: "10.111.176.49", max_rep_lag: 100}  
+       - {mysql_hostname: "vsguc1gpmyas-43", server_weight: 100, server_status: "ONLINE", server_hostgroup_id: 1, mysql_ip_address: "10.111.176.25", max_rep_lag: 100}
+       - {mysql_hostname: "vsguc1gpmyas-9d", server_weight: 100, server_status: "ONLINE", server_hostgroup_id: 1, mysql_ip_address: "10.111.176.23", max_rep_lag: 100}
+       - {mysql_hostname: "vsguc1gpmyas-c9", server_weight: 100, server_status: "ONLINE", server_hostgroup_id: 1, mysql_ip_address: "10.111.176.21", max_rep_lag: 100}
+       - {mysql_hostname: "vsguc1gpmyas-cf", server_weight: 100, server_status: "ONLINE", server_hostgroup_id: 1, mysql_ip_address: "10.111.176.22", max_rep_lag: 100}
+       - {mysql_hostname: "vsguc1gpmyas-d2", server_weight: 100, server_status: "ONLINE", server_hostgroup_id: 1, mysql_ip_address: "10.111.176.27", max_rep_lag: 100}
+   tasks:
+     - include_role:
+         name: ../roles/proxysql_add_mysql_user
+     - include_role:
+         name: ../roles/proxysql_add_mysql_server

@@ -1,0 +1,21 @@
+---
+
+- name: Check if mysql Exists
+  become: true
+  stat:
+    path: /etc/init.d/mysql
+  register: mysql_status
+
+- name: Include specific Beats
+  become: true
+  include: debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Include specific Beats
+  become: true
+  include: redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Include metricbeat installation yaml
+  become: true
+  include: metricbeat.yml

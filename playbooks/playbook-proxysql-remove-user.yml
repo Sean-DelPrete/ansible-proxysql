@@ -1,0 +1,8 @@
+---
+
+
+ - name: ProxySQL node setup
+   hosts: proxysql
+   tasks:
+     - include_role:
+         name: ../roles/proxysql_remove_mysql_user
