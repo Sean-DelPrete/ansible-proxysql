@@ -1,0 +1,14 @@
+---
+
+- name: Set Proxysql Variables 
+  proxysql_global_variables: 
+    login_user: "{{ proxysql_admin_user }}"
+    login_password: "{{ proxysql_admin_password }}"
+    variable: "{{ item.proxysql_variable }}"
+    value: "{{ item.proxysql_variable_value }}"
+    save_to_disk: "{{ item.proxysql_variable_save_to_disk }}"
+    load_to_runtime: "{{ item.proxysql_variable_load_to_runtime }}"
+  with_items: 
+    - "{{ proxysql_server_variable_values }}"
+  tags:
+    - proxyql-config-load

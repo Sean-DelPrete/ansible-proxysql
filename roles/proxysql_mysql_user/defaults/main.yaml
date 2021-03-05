@@ -1,0 +1,18 @@
+---
+
+proxysql_admin_host: "0.0.0.0"
+proxysql_admin_port: 6032
+proxysql_admin_user: "admin"
+proxysql_admin_password: "{{ lookup('env','PROXYSQL_ADMIN_PASSWORD') }}"
+mysql_user_active: True
+mysql_user_state: present 
+proxysql_create_users:
+  - {mysql_username: "sean", mysql_password: "Virtue84!", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "ranga", mysql_password: "funtimes", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "rpotluri", mysql_password: "", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "kjamal",  mysql_password: "", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "sdelprete", mysql_password: "", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "mysql_admin",  mysql_password: "", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "dakishore",  mysql_password: "", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "dbadmin", mysql_password: "db@Dm1n", mysql_user_default_hostgroup: 0}
+  - {mysql_username: "datadog", mysql_password: "DataD0gGCP!", mysql_user_default_hostgroup: 0}

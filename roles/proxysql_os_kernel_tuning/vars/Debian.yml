@@ -15,7 +15,7 @@ os_sysctl:
   - {name: net.core.wmem_default, value: 262144}
   - {name: net.core.wmem_max, value: 1048576}
   - {name: net.core.somaxconn, value: 2048}
-  - {name: kernel.panic_on_oops, value: 1}
+  - {name: kernel.panic_on_oops, value: 0}
   - {name: kernel.sysrq, value: 1}
   - {name: vm.swappiness, value: 0}
   - {name: vm.min_free_kbytes, value: 524288}

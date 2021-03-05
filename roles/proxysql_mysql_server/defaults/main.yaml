@@ -1,0 +1,16 @@
+---
+
+proxysql_create_server: true
+proxysql_admin_host: "0.0.0.0"
+proxysql_admin_port: 6032
+proxysql_admin_user: "admin"
+proxysql_admin_password: "{{ lookup('env','PROXYSQL_ADMIN_PASSWORD') }}"
+proxysql_mysql_servers:
+  - {mysql_hostname: "vsguc1gpmyas-9c", server_weight: 100, server_status: "ONLINE", server_hostgroup_id: 0, mysql_ip_address: "10.111.176.19", max_rep_lag: 100, server_state: "present"}
+  - {mysql_hostname: "vsguc1gpmyas-d2", server_weight: 200, server_status: "ONLINE", server_hostgroup_id: 1, mysql_ip_address: "10.111.176.27", max_rep_lag: 100, server_state: "present"}
+  - {mysql_hostname: "vsguc1gpmyas-c9", server_weight: 300, server_status: "ONLINE", server_hostgroup_id: 1, mysql_ip_address: "10.111.176.21", max_rep_lag: 200, server_state: "present"}
+  - {mysql_hostname: "vsguc1gpmyas-cf", server_weight: 200, server_status: "ONLINE", server_hostgroup_id: 2, mysql_ip_address: "10.111.176.22", max_rep_lag: 100, server_state: "present"}
+  - {mysql_hostname: "vsguc1gpmyas-9d", server_weight: 300, server_status: "ONLINE", server_hostgroup_id: 2, mysql_ip_address: "10.111.176.23", max_rep_lag: 200, server_state: "present"}
+  - {mysql_hostname: "vsguc1gpmyas-38", server_weight: 200, server_status: "ONLINE", server_hostgroup_id: 3, mysql_ip_address: "10.111.176.24", max_rep_lag: 100, server_state: "present"}
+  - {mysql_hostname: "vsguc1gpmyas-43", server_weight: 300, server_status: "ONLINE", server_hostgroup_id: 3, mysql_ip_address: "10.111.176.25", max_rep_lag: 200, server_state: "present"}
+

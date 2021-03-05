@@ -1,0 +1,11 @@
+---
+
+service_name: "proxysql"
+proxysql_admin_user: "admin"
+proxysql_admin_password: "{{ lookup('env','PROXYSQL_ADMIN_PASSWORD') }}"
+#proxysql_variable: "mysql-interfaces"
+#proxysql_variable_value: "0.0.0.0:3306"
+#proxy_save_to_disk: "yes"
+
+proxysql_server_variable_values:
+  - {proxysql_variable: "mysql-interfaces", proxysql_variable_value: "0.0.0.0:3306", proxysql_variable_save_to_disk: "yes", proxysql_variable_load_to_runtime: "yes"}  

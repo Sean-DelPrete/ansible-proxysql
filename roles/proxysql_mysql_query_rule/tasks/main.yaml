@@ -1,0 +1,24 @@
+---
+
+
+- name: "Create ProxySQL Query routing rules"
+  proxysql_query_rules:
+    login_host: "{{ proxysql_admin_host }}"
+    login_port: "{{ proxysql_admin_port }}"
+    login_user: "{{ proxysql_admin_user }}"
+    login_password: "{{ proxysql_admin_password }}"
+    username: "{{ item.proxysql_query_match_username | default(omit) }}"
+    schemaname: "{{ item.proxysql_query_match_schemaname | default(omit) }}"
+    match_pattern: "{{ item.proxysql_query_match_pattern | default(omit) }}"
+    destination_hostgroup: "{{ item.proxysql_query_destination_hostgroup | default(omit) }}"
+    active: "{{ item.proxysql_query_active }}"
+    flagIN: "{{ item.proxysql_query_flagIN | default(omit) }}"
+    flagOUT: "{{ item.proxysql_query_flagOUT | default(omit) }}"
+    apply: "{{ item.proxysql_query_apply }}"
+    state: "{{ item.proxysql_query_state }}"
+    load_to_runtime: True
+    save_to_disk: True
+  with_items: 
+    - "{{ proxysql_query_rules }}" 
+  tags: 
+    - proxysql-edit-query-rules

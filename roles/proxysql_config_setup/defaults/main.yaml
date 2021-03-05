@@ -14,13 +14,13 @@ proxysql_conf_dir: "/etc"
 proxysql_conf_file: "proxysql.cnf"
 proxysql_conf_template: "proxysql.cnf.j2"
 mysql_route_port: 3306
-monitor_username: "monitor"
-monitor_password: "monitor"
+proxysql_monitor_username: "monitor"
+proxysql_monitor_password: "{{ lookup('env','PROXYSQL_MONITOR_PASSWORD') }}"
 root_mysql_username: "root"
 root_mysql_password: "testing24"
 
 proxysql_admin_user: "admin"
-proxysql_admin_pass: "admin"
+proxysql_admin_pass: "{{ lookup('env','PROXYSQL_ADMIN_PASSWORD') }}"
 # MySQL VM tuning parameters
 #
 enable_hugepages_tuning: true

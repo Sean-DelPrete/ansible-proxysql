@@ -1,0 +1,12 @@
+---
+
+proxysql_admin_host: "0.0.0.0"
+proxysql_admin_port: 6032
+proxysql_admin_user: "admin"
+proxysql_admin_password: "{{ lookup('env','PROXYSQL_ADMIN_PASSWORD') }}"
+proxysql_query_rules:
+  - {proxysql_query_match_username: "", proxysql_query_match_schemaname: "", proxysql_query_match_pattern: "^SELECT.*FOR UPDATE$", proxysql_query_destination_hostgroup: "15", proxysql_query_active: "1", proxysql_query_state: "present", proxysql_query_apply: "1"}  
+  - {proxysql_query_match_username: "", proxysql_query_match_schemaname: "", proxysql_query_match_pattern: "^SELECT", proxysql_query_destination_hostgroup: "16", proxysql_query_active: "1", proxysql_query_state: "present", proxysql_query_apply: "1"}
+  - {proxysql_query_match_username: "", proxysql_query_match_schemaname: "", proxysql_query_match_pattern: "^SELECT.*FOR UPDATE$", proxysql_query_destination_hostgroup: "15", proxysql_query_active: "1", proxysql_query_state: "present", proxysql_query_apply: "1"}  
+  - {proxysql_query_match_username: "", proxysql_query_match_schemaname: "", proxysql_query_match_pattern: "^SELECT.*FOR UPDATE$", proxysql_query_destination_hostgroup: "17", proxysql_query_active: "1", proxysql_query_state: "present", proxysql_query_apply: "1"}
+  - {proxysql_query_match_username: "", proxysql_query_match_schemaname: "", proxysql_query_match_pattern: "^SELECT", proxysql_query_destination_hostgroup: "18", proxysql_query_active: "1", proxysql_query_state: "present", proxysql_query_apply: "1"}

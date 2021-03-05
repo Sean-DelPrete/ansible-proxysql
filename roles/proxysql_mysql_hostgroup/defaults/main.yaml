@@ -1,0 +1,8 @@
+---
+
+proxysql_admin_host: "0.0.0.0"
+proxysql_admin_port: 6032
+proxysql_admin_user: "admin"
+proxysql_admin_password: "{{ lookup('env','PROXYSQL_ADMIN_PASSWORD') }}"
+proxysql_mysql_hostgroups:
+  - {proxysql_writer_hostgroup: "1", proxysql_reader_hostgroup: "2", proxysql_hostgroup_state: "present"}

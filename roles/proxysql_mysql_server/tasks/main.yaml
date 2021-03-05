@@ -1,0 +1,22 @@
+---
+
+
+- name: "Create ProxySQL Server routing rules"
+  proxysql_backend_servers:
+    login_host: "{{ proxysql_admin_host }}"
+    login_port: "{{ proxysql_admin_port }}"
+    login_user: "{{ proxysql_admin_user }}"
+    login_password: "{{ proxysql_admin_password }}"
+    hostname: "{{ item.mysql_ip_address }}"
+    comment: "{{ item.mysql_hostname }}"
+    hostgroup_id: "{{ item.server_hostgroup_id }}"
+    status: "{{ item.server_status }}"
+    weight: "{{ item.server_weight }}"
+    max_replication_lag: "{{ item.max_rep_lag }}"
+    state: "{{ item.server_state }}"
+    load_to_runtime: True
+    save_to_disk: True
+  with_items: 
+    - "{{ proxysql_mysql_servers }}" 
+  tags: 
+    - proxysql-mysql-servers

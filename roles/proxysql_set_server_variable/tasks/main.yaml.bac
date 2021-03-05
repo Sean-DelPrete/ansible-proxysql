@@ -1,0 +1,16 @@
+---
+
+- name: Load Proxysql Variables from config
+  proxysql_global_variables: 
+    login_user: "{{ proxysql_admin_user }}"
+    login_password: "{{ proxysql_admin_password }}"
+    variable: "{{ proxysql_variable }}"
+    value: "{{ proxysql_variable_value }}"
+    save_to_disk: "{{ proxysql_save_to_disk }}"
+  with_items:
+    - "{{ proxysql_config_values }}"
+  notify: 
+    - Restart Proxysql
+  tags:
+    - proxyql-config-load
+
