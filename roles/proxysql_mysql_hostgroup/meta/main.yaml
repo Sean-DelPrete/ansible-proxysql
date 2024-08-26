@@ -5,7 +5,6 @@ galaxy_info:
   role_name: proxysql_mysql_hostgroup
   author: Sean Del Prete
   description: TSG Cloud Solutions - Data Dude
-  company: CoreLogic
 
   license: license (GPLv3)
 

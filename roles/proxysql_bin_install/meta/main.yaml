@@ -5,7 +5,6 @@ galaxy_info:
   role_name: proxysql_bin_install
   author: Sean Del Prete
   description: TSG Cloud Solutions - Data Dude
-  company: CoreLogic - Google
 
   license: license (GPLv3)
 

@@ -2,10 +2,9 @@
 
 
 galaxy_info:
-  role_name: mysql_os_kernel_tuning
-  author: Ranga Potluri
-  description: TSG Cloud Solutions - Data Dude
-  company: CoreLogic
+  role_name: proxysql_os_kernel_tuning
+  author: Sean Del Prete
+  description: Tune os for proxysql install 
 
   license: license (GPLv3)
 
